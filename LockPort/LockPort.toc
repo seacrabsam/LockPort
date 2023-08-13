@@ -1,0 +1,8 @@
+## Title: |CFFB700B7L|CFFFF00FFo|CFFFF50FFc|CFFFF99FFk|CFFFFC4FFP|cffffffffort|r
+## Notes: Warlock Raid Summon Assistant
+## Version: 2.0.3
+## Author: |cff02bf02Bennylava|r
+## Interface: 11200
+## SavedVariables: LockPortOptions lpupdateavailable
+LockPort.xml
+LockPort_Settings.xml

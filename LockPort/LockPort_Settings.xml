@@ -1,0 +1,270 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<!-- settings frame -->
+	<Frame name="LockPort_SettingsFrame" frameStrata="DIALOG" toplevel="true" parent="UIParent" movable="true" enableMouse="true" hidden="true" clampedToScreen="true">
+		<Size>
+			<AbsDimension x="300" y="325"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="LockPort_Settings_Chat_Header" inherits="LockPort_Settings_GameFontHeader" text="LockPortLoc_Settings_Chat_Header">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="LockPort_Settings_Chat_Whisper" inherits="LockPort_Settings_GameFontNormal" text="Toggle the usage of whisper.">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="80" y="-62"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="LockPort_Settings_Chat_Zone" inherits="LockPort_Settings_GameFontNormal" text="Toggle the zoneinfo message.">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="85" y="-86"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="LockPort_Settings_Chat_Shard" inherits="LockPort_Settings_GameFontNormal" text="Toggle shards count message.">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="87" y="-111"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="LockPort_Settings_Chat_Sound" inherits="LockPort_Settings_GameFontNormal" text="Toggle sound on summon request.">
+							<Anchors>
+								<Anchor point="RIGHT" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="109" y="-136"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" tile="true"></Backdrop>
+		<Frames>
+			<Frame name="LockPort_SettingsTitleFrame" hidden="false">
+				<Size>
+					<AbsDimension x="300" y="18"/>
+				</Size>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="LockPort_SettingsFrame_Header" inherits="LockPort_GameFontHeader" text="LockPortLoc_Settings_Header">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" relativePoint="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-8"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+					<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\AddOns\LockPort\img\border" tile="true">			
+						<BackgroundInsets>
+							<AbsInset bottom="2" left="2" right="2" top="2"></AbsInset>
+						</BackgroundInsets>
+						<TileSize>
+							<AbsValue val="32"></AbsValue>
+						</TileSize>
+						<EdgeSize>
+							<AbsValue val="16"></AbsValue>
+						</EdgeSize>
+						<BorderColor>
+						<Color a="0" r="1" g="1" b="1" />
+						</BorderColor>
+					</Backdrop>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Button name="LockPort_Settings_CloseButton" inherits="LockPort_SettingsMenu_TitleButton_Template">
+						<Scripts>
+							<OnClick>
+								LockPort_SettingsFrame:Hide()
+							</OnClick>
+							<OnLeave>
+							</OnLeave>
+						</Scripts>
+						<NormalTexture file="Interface\AddOns\LockPort\img\close"/>
+						<HighlightTexture file="Interface\AddOns\LockPort\img\close" alphaMode="ADD"/>
+					</Button>
+				<CheckButton name="WhisperCheckButton" parent="LockPort_SettingsFrame">
+					<Size>
+						<AbsDimension x="35" y="35" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="15" y="-45"></AbsDimension>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+					<PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+					<HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+					<CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+					<DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+					<Scripts>
+						<OnLoad>
+							this.tooltip = "Whispers";
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(LockPort_SettingsFrame, "ANCHOR_TOPLEFT",4, -380);
+							GameTooltip:SetPadding(33, 0);
+							GameTooltip:SetText(this.tooltip);
+							GameTooltip:AddLine("Toggles on and off whisper messages on summon.", 255,71,9,0);			
+							GameTooltip:Show();
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide();
+						</OnLeave>			
+						<OnClick>
+							WhisperCheckButton_OnClick()
+						</OnClick>
+					</Scripts>
+				</CheckButton>
+				<CheckButton name="ZoneCheckButton" parent="LockPort_SettingsFrame">
+					<Size>
+						<AbsDimension x="35" y="35" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="15" y="-70"></AbsDimension>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+					<PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+					<HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+					<CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+					<DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+					<Scripts>
+						<OnLoad>
+							this.tooltip = "Zones";
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(LockPort_SettingsFrame, "ANCHOR_TOPLEFT",4, -380);
+							GameTooltip:SetPadding(48, 0);
+							GameTooltip:SetText(this.tooltip);
+							GameTooltip:AddLine("Toggles on and off zone messages on summon.", 255,71,9,0);			
+							GameTooltip:Show();
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide();
+						</OnLeave>			
+						<OnClick>
+							ZoneCheckButton_OnClick()
+						</OnClick>
+					</Scripts>
+				</CheckButton>
+				<CheckButton name="ShardsCheckButton" parent="LockPort_SettingsFrame">
+					<Size>
+						<AbsDimension x="35" y="35" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="15" y="-95"></AbsDimension>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+					<PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+					<HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+					<CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+					<DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+					<Scripts>
+						<OnLoad>
+							this.tooltip = "Shards";
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(LockPort_SettingsFrame, "ANCHOR_TOPLEFT",4, -380);
+							GameTooltip:SetPadding(44, 0);
+							GameTooltip:SetText(this.tooltip);
+							GameTooltip:AddLine("Toggles on and off shard messages on summon.", 255,71,9,0);			
+							GameTooltip:Show();
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide();
+						</OnLeave>			
+						<OnClick>
+							ShardsCheckButton_OnClick()
+						</OnClick>
+					</Scripts>
+				</CheckButton>
+				<CheckButton name="SoundCheckButton" parent="LockPort_SettingsFrame">
+					<Size>
+						<AbsDimension x="35" y="35" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="15" y="-120"></AbsDimension>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+					<PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+					<HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
+					<CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+					<DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+					<Scripts>
+						<OnLoad>
+							this.tooltip = "Sound";
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(LockPort_SettingsFrame, "ANCHOR_TOPLEFT",4, -380);
+							GameTooltip:SetPadding(50, 0);
+							GameTooltip:SetText(this.tooltip);
+							GameTooltip:AddLine("Toggles on and off sound on summon request.", 255,71,9,0);			
+							GameTooltip:Show();
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide();
+						</OnLeave>			
+						<OnClick>
+							SoundCheckButton_OnClick()
+						</OnClick>
+					</Scripts>
+				</CheckButton>
+				</Frames>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForDrag("LeftButton")
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+			</OnDragStop>
+		</Scripts>
+	</Frame>	
+</Ui>
